@@ -33,6 +33,12 @@
 @property(nonatomic,strong) Class weekdayCellClass;
 @property(nonatomic,strong) Class dayCellClass;
 
+//initialized by default to MNCalendarViewLayout
+@property(nonatomic,strong) UICollectionViewLayout* collectionViewLayout;
+
+//YES by default
+@property(nonatomic) BOOL showsWeekdayCell;
+
 - (void)reloadData;
 - (void)registerUICollectionViewClasses; 
 

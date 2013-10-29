@@ -14,6 +14,8 @@ NSString *const MNCalendarHeaderViewIdentifier = @"MNCalendarHeaderViewIdentifie
 
 @property(nonatomic,strong,readwrite) UILabel *titleLabel;
 
+@property(nonatomic,strong) NSDateFormatter* dateFormatter;
+
 @end
 
 @implementation MNCalendarHeaderView
@@ -31,14 +33,22 @@ NSString *const MNCalendarHeaderViewIdentifier = @"MNCalendarHeaderViewIdentifie
   return self;
 }
 
-- (void)setDate:(NSDate *)date {
-  _date = date;
+- (NSDateFormatter*) dateFormatter
+{
+    if (!_dateFormatter)
+    {
+        self.dateFormatter = [[NSDateFormatter alloc] init];
+        
+        [self.dateFormatter setDateFormat:@"LLLL yyyy"];
+    }
+    
+    return _dateFormatter;
+}
 
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-
-  [dateFormatter setDateFormat:@"MMMM yyyy"];
-
-  self.titleLabel.text = [dateFormatter stringFromDate:self.date];
+- (void)setDate:(NSDate *)date
+{
+    _date = date;
+    self.titleLabel.text = [self.dateFormatter stringFromDate:self.date];
 }
 
 @end
