@@ -40,6 +40,7 @@
   self.fromDate   = [NSDate.date mn_beginningOfDay:self.calendar];
   self.toDate     = [self.fromDate dateByAddingTimeInterval:MN_YEAR * 4];
   self.daysInWeek = 7;
+  _cellAspectRatio = 1.;
   
   self.headerViewClass  = MNCalendarHeaderView.class;
   self.weekdayCellClass = MNCalendarViewWeekdayCell.class;
@@ -134,6 +135,13 @@
     [super setBackgroundColor:backgroundColor];
     
     self.collectionView.backgroundColor = backgroundColor;
+}
+
+- (void) setCellAspectRatio:(CGFloat)cellAspectRatio
+{
+    _cellAspectRatio = cellAspectRatio;
+    
+    [self reloadData];
 }
 
 - (void)setSelectedDate:(NSDate *)selectedDate {
@@ -353,7 +361,7 @@
     
     CGFloat width      = self.bounds.size.width;
     CGFloat itemWidth  = roundf(width / self.daysInWeek);
-    CGFloat itemHeight = itemWidth;
+    CGFloat itemHeight = itemWidth * _cellAspectRatio;
     if (self.showsWeekdayCell &&
         indexPath.item < self.daysInWeek)
     {

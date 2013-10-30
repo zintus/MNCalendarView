@@ -39,6 +39,9 @@
 //YES by default
 @property(nonatomic) BOOL showsWeekdayCell;
 
+//height / width. 1 by default
+@property (nonatomic) CGFloat cellAspectRatio;
+
 - (void)reloadData;
 - (void)registerUICollectionViewClasses; 
 
